@@ -1,0 +1,195 @@
+{
+  "table-layout": {
+    "prefix": "table-layout",
+    "body": [
+      "<div class=\"row\">",
+      "    <div class=\"col-12\">",
+      "        <x-admin.ui.card>",
+      "            <x-admin.ui.card.body :paddingZero=true>",
+      "                <x-admin.ui.table.layout searchPlaceholder=\"Search users\">",
+      "                    <x-admin.ui.table>",
+      "                        <x-admin.ui.table.header>",
+      "                            <tr>",
+      "                                <th></th>",
+      "                            </tr>",
+      "                        </x-admin.ui.table.header>",
+      "                        <x-admin.ui.table.body>",
+      "                            @forelse($users as $user)",
+      "                                <tr>",
+      "                                    ",
+      "                                </tr>",
+      "                            @empty",
+      "                                <x-admin.ui.table.empty_message />",
+      "                            @endforelse",
+      "                        </x-admin.ui.table.body>",
+      "                    </x-admin.ui.table>",
+      "                    @if ($users->hasPages())",
+      "                        <x-admin.ui.table.footer>",
+      "                            {{ paginateLinks($users) }}",
+      "                        </x-admin.ui.table.footer>",
+      "                    @endif",
+      "                </x-admin.ui.table.layout>",
+      "            </x-admin.ui.card.body>",
+      "        </x-admin.ui.card>",
+      "    </div>",
+      "</div>"
+    ],
+    "description": "table-layout-component"
+  },
+  "table": {
+    "prefix": "table",
+    "body": [
+      "<x-admin.ui.table>",
+      "    <x-admin.ui.table.header>",
+      "        <tr>",
+      "            <th></th>",
+      "        </tr>",
+      "    </x-admin.ui.table.header>",
+      "    <x-admin.ui.table.body>",
+      "        @forelse($users as $user)",
+      "            <tr>",
+      "                ",
+      "            </tr>",
+      "        @empty",
+      "            <x-admin.ui.table.empty_message />",
+      "        @endforelse",
+      "    </x-admin.ui.table.body>",
+      "</x-admin.ui.table>",
+      "@if ($users->hasPages())",
+      "    <x-admin.ui.table.footer>",
+      "        {{ paginateLinks($users) }}",
+      "    </x-admin.ui.table.footer>",
+      "@endif"
+    ],
+    "description": "table-component"
+  },
+  "card": {
+    "prefix": "card",
+    "body": [
+      "<x-admin.ui.card>",
+      "    <x-admin.ui.card.header>",
+      "        <h4 class=\"card-title\">@lang('Card title')</h4>",
+      "    </x-admin.ui.card.header>",
+      "    <x-admin.ui.card.body>",
+      "",
+      "    </x-admin.ui.card.body>",
+      "</x-admin.ui.card>"
+    ],
+    "description": "card-component"
+  },
+  "modal": {
+    "prefix": "modal",
+    "body": [
+      "<x-admin.ui.modal id=\"modalId\">",
+      "    <x-admin.ui.modal.header>",
+      "        <h4 class=\"modal-title\">@lang('Modal Title')</h4>",
+      "        <button type=\"button\" class=\"btn-close close\" data-bs-dismiss=\"modal\" aria-label=\"Close\">",
+      "            <i class=\"las la-times\"></i>",
+      "        </button>",
+      "    </x-admin.ui.modal.header>",
+      "    <x-admin.ui.modal.body>",
+      "        ",
+      "    </x-admin.ui.modal.body>",
+      "</x-admin.ui.modal>"
+    ],
+    "description": "modal-component"
+  },
+  "submit-button": {
+    "prefix": "submit-button",
+    "body": [
+      "<x-admin.ui.btn.submit />",
+    ],
+    "description": "submit-button-component"
+  },
+  "modal-button": {
+    "prefix": "modal-button",
+    "body": [
+      "<x-admin.ui.btn.modal />",
+    ],
+    "description": "modal-button-component"
+  },
+  "confirmation modal": {
+    "prefix": "confirmation modal",
+    "body": [
+      "<button type=\"button\" class=\"btn  btn--danger  confirmationBtn\" data-question=\"@lang('Are you sure to delete the notification?')\"",
+      "        data-action=\"{{ route('admin.notifications.delete.single', $notification->id) }}\">",
+      "        <i class=\"fa-regular fa-trash-can\"></i>",
+      " </button>",
+      "<x-confirmation-modal />"
+    ],
+    "description": "confirmation modal"
+  },
+  "back-button": {
+    "prefix": "back-button",
+    "body": [
+      "<x-back_btn route=\"{{ route('admin.cron.index') }}\" />"
+    ],
+    "description": "back-button"
+  },
+  "image-uploader": {
+    "prefix": "image-uploader",
+    "body": [
+      "<x-image-uploader name=\"favicon\" id=\"favicon\" ${1:}:imagePath=\"siteFavicon() . '?' . time()\" :size=\"false\"",
+      "                                    :required=\"false\" />"
+    ],
+    "description": "image-uploader"
+  },
+  "widget-four": {
+    "prefix": "widget-four",
+    "body": [
+      " <x-admin.ui.widget.four ${1:}url=# variant=\"success\" title=\"Demo XXXX\" value=\"0\" icon=\"las la-arrow-down\" />"
+    ],
+    "description": "widget-four"
+  },
+  "widget-two": {
+    "prefix": "widget-two",
+    "body": [
+      "<x-admin.ui.widget.two ${1:}:url=\"route('admin.users.all')\" variant=\"primary\" title=\"Total Users\" :value=\"$widget['total_users']\"",
+      "            icon=\"las la-users\" />"
+    ],
+    "description": "widget-two"
+  },
+  "widget-three": {
+    "prefix": "widget-three",
+    "body": [
+      " <x-admin.ui.widget.three ${1:url}=\"#\" variant=\"primary\" title=\"Demo 1\" :value=\"100\"",
+      "            icon=\"las la-arrow-down\" />"
+    ],
+    "description": "widget-three"
+  },
+  "widget-five": {
+    "prefix": "widget-five",
+    "body": [
+      "<x-admin.ui.widget.five ${1:url}=\"#\" variant=\"info\" title=\"Demo 3\" :value=\"200\" icon=\"las la-arrow-up\" />"
+    ],
+    "description": "widget-five"
+  },
+  "status-switch": {
+    "prefix": "status-switch",
+    "body": [
+      "<x-admin.other.status_switch :status=\"${1:$zone}->status\" :action=\"route('admin.zone.status', $zone->id)\" title=\"zone\" />"
+    ],
+    "description": "status-switch"
+  },
+  "edit-button": {
+    "prefix": "edit-button",
+    "body": [
+      "<x-admin.ui.btn.edit :href=\"${1:route}('admin.zone.create', $zone->id)\" />"
+    ],
+    "description": "edit-button"
+  },
+  "add-button": {
+    "prefix": "add-button",
+    "body": [
+      "<x-admin.ui.btn.add :href=\"${1:route}('admin.zone.create')\" />"
+    ],
+    "description": "add-button"
+  },
+  "details-button": {
+    "prefix": "details-button",
+    "body": [
+      "<x-admin.ui.btn.details :href=\"${1:route}('admin.zone.create')\" />"
+    ],
+    "description": "details-button"
+  }
+}

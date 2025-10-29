@@ -1,0 +1,7 @@
+{
+    "powermode.enabled": false,
+    "powermode.explosions.backgroundMode": "mask",
+    "powermode.presets": "particles",
+    "powermode.explosions.gifMode": "restart",
+    "editor.fontSize": 16
+}
