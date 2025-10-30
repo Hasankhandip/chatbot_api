@@ -2,7 +2,7 @@
     <nav class="navbar text-white bg-primary navbar-expand-lg bg-body-tertiary">
         <div class="container">
             <a class="navbar-brand" href="{{ route('home') }}">
-                <h1 class="text-white">@lang('Logo')</h1>
+                <h1 class="text-white">@lang('Ovo Chat')</h1>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

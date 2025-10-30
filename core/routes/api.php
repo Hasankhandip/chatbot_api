@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Api\ChatController;
+
 use Illuminate\Support\Facades\Route;
 
 /*

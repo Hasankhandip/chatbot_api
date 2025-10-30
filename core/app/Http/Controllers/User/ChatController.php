@@ -1,6 +1,8 @@
 <?php
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
+use App\Constants\Status;
+use App\Http\Controllers\Controller;
 use App\Models\ChatHistory;
 use App\Services\GeminiService;
 use Illuminate\Http\Request;
@@ -32,11 +34,12 @@ class ChatController extends Controller {
 
         $conversations = ChatHistory::where('user_id', $userId)
             ->where('sender', 1)
-            ->select('conversation_id', 'message')
-            ->orderBy('conversation_id', 'desc')
+            ->select('conversation_id', 'message', 'created_at')
+            ->orderBy('created_at', 'asc')
             ->get()
             ->groupBy('conversation_id')
-            ->map(fn($group) => $group->first());
+            ->map(fn($group) => $group->first())
+            ->sortByDesc(fn($conv) => $conv->created_at);
 
         return view('Template::chat', compact('pageTitle', 'messages', 'conversations', 'currentConversationId'));
     }
@@ -50,30 +53,28 @@ class ChatController extends Controller {
     }
 
     public function chat(Request $request) {
-        $request->validate(['message' => 'required|string']);
+        $request->validate([
+            'message' => 'required|string',
+        ]);
 
-        $userId = auth()->id();
-
-        // ✅ এখানে conversation ID ঠিক করা হচ্ছে
+        $userId         = auth()->id();
         $conversationId = $request->conversation_id ?? $this->nextConversationId($userId);
 
-        // Save user message
-        ChatHistory::create([
-            'user_id'         => $userId,
-            'conversation_id' => $conversationId,
-            'message'         => $request->message,
-            'sender'          => 1,
-        ]);
+        $userChat                  = new ChatHistory();
+        $userChat->user_id         = $userId;
+        $userChat->conversation_id = $conversationId;
+        $userChat->message         = $request->message;
+        $userChat->sender          = Status::USER;
+        $userChat->save();
 
         $botReply = $this->gemini->generateContent($request->message);
 
-        // Save bot reply
-        ChatHistory::create([
-            'user_id'         => $userId,
-            'conversation_id' => $conversationId,
-            'message'         => $botReply,
-            'sender'          => 2,
-        ]);
+        $botChat                  = new ChatHistory();
+        $botChat->user_id         = $userId;
+        $botChat->conversation_id = $conversationId;
+        $botChat->message         = $botReply;
+        $botChat->sender          = Status::BOT;
+        $botChat->save();
 
         return response()->json([
             'reply'           => $botReply,

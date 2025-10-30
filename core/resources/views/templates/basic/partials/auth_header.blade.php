@@ -1,7 +1,7 @@
 <nav class="navbar text-white bg-primary navbar-expand-lg bg-body-tertiary">
     <div class="container">
         <a class="navbar-brand" href="{{ route('home') }}">
-            <h1 class="text-white">@lang('Logo')</h1>
+            <h1 class="text-white">@lang('Ovo Chat')</h1>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,7 +12,7 @@
                 <li class="nav-item">
                     <a class="nav-link text-white" href="{{ route('user.home') }}">@lang('Dashboard')</a>
                 </li>
-                 <li class="nav-item">
+                <li class="nav-item">
                     <a class="nav-link text-white" href="{{ route('user.chat') }}">@lang('Chat')</a>
                 </li>
                 <li class="nav-item">

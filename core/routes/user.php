@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\ChatController;
+
 use Illuminate\Support\Facades\Route;
 
 Route::namespace('User\Auth')->name('user.')->middleware('guest')->group(function () {
@@ -52,10 +52,12 @@ Route::middleware('auth')->name('user.')->group(function () {
 
         Route::namespace('User')->group(function () {
 
-            Route::get('/chat', [ChatController::class, 'index'])->name('chat.index');
-            Route::post('/chat', [ChatController::class, 'chat'])->name('chat');
-            Route::post('/chat/new', [ChatController::class, 'newConversation'])->name('chat.new');
-            Route::get('/chat/load/{conversationId}', [ChatController::class, 'loadConversation'])->name('chat.load');
+            Route::controller('ChatController')->name('chat')->group(function () {
+                Route::get('/chat', 'index')->name('.index');
+                Route::post('/chat', 'chat');
+                Route::post('/chat/new', 'newConversation')->name('.new');
+                Route::get('/chat/load/{conversationId}', 'loadConversation')->name('.load');
+            });
 
             Route::controller('UserController')->group(function () {
                 Route::get('dashboard', 'home')->name('home');

@@ -4,5 +4,4 @@
     <div class="py-5">
         @yield('content')
     </div>
-    @include('Template::partials.footer')
 @endsection
